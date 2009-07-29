@@ -1,4 +1,3 @@
-
 (defn mean [s]
   (/ (apply + s) (count s)))
 
@@ -10,11 +9,22 @@
                    "mean" mean
                    "sqrt" sqrt-list})
 
-(defn strings-to-big-decimals [strings]
+(defn strings-to-nums [strings]
   (map #(Double. %1) strings))
 
+(defn -abs [a b]
+  (if (< a b)
+    (- b a)
+    (- a b)))
+
+(defn haar [a b]
+  (let [m (mean [a b])]
+    [m (-abs m a)]))
+
+(println "First one (sum/mean/product/sqrt of cmd line args):")
 (println ((function-map (first *command-line-args*)) 
-          (strings-to-big-decimals (rest *command-line-args*))))
+          (strings-to-nums (rest *command-line-args*))))
+(println "Second one (Harr transform):")
 
 ;(print ((function-map (first *command-line-args*))
 ;        (strings-to-big-decimals (rest *command-line-args*))))
